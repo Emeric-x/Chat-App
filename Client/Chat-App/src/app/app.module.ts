@@ -16,8 +16,8 @@ import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.comp
 
 const appRoutes: Routes = [
   { path: '', component: GroupsChatComponent },
-  { path: 'Signin', component: SignInComponent },
-  { path: 'Signup', component: SignUpComponent }, 
+  { path: 'Sign-in', component: SignInComponent },
+  { path: 'Sign-up', component: SignUpComponent }, 
   { path: 'GroupsChat', canActivate:[AuthGuardService], component: GroupsChatComponent },
   { path: 'Chat', canActivate:[AuthGuardService], component: ChatComponent },
   { path: 'not-found', component: FourOhFourComponent },

@@ -10,6 +10,8 @@ app.use(express.json())
 //Import routes
 const usersRoute = require("./routes/users")
 app.use('/users', usersRoute)
+const chatsRoute = require("./routes/chats")
+app.use('/chats', chatsRoute)
 
 /*app.get('/', (req, res) => {
     res.send('Hello World!')
