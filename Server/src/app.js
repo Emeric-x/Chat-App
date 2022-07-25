@@ -8,8 +8,8 @@ app.use(cors())
 app.use(express.json())
 
 //Import routes
-const gamesRoute = require("./routes/games")
-app.use('/games', gamesRoute)
+const usersRoute = require("./routes/users")
+app.use('/users', usersRoute)
 
 /*app.get('/', (req, res) => {
     res.send('Hello World!')
