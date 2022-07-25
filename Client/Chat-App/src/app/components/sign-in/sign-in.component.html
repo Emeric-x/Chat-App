@@ -1,1 +1,13 @@
-<p>sign-in works!</p>
+<div>
+    <h1>Sign-in</h1>
+    <input type="text" #userLogin required>
+    <input type="password" #userPassword required>
+
+    <button type="button" (click)="SignIn(userLogin.value, userPassword.value)">Go</button>
+</div>
+
+<br>
+
+<div>
+    <a routerLink="/Sign-up">Sign-up</a>
+</div>

@@ -52,7 +52,7 @@ exports.UpdateUserPersonalData = async(req, res) => {
     }
 }
 
-exports.UpdateUserGroups = async(req, res) => {
+exports.AddUserChat = async(req, res) => {
     try {
         let user = await User.findById(req.params.id)
         if (!user) {
@@ -63,25 +63,6 @@ exports.UpdateUserGroups = async(req, res) => {
             user = await User.findOneAndUpdate({ _id: req.params.id }, user, { new: true })
 
             res.json(req.body)
-        }
-    } catch (err) {
-        console.log(err)
-        res.status(500).send('Server Error')
-    }
-}
-
-exports.UpdateUserMatch = async(req, res) => {
-    try {
-        let user = await User.findById(req.body.user_id)
-
-        if (!user) {
-            res.status(404).json({ msg: 'No matching user' })
-        } else {
-            user.match = req.body.match_id
-
-            user = await User.findOneAndUpdate({ _id: req.body.user_id }, user, { new: true })
-
-            res.send(true)
         }
     } catch (err) {
         console.log(err)
@@ -104,13 +85,13 @@ exports.GetUserById = async(req, res) => {
     }
 }
 
-exports.GetUserByLoginInfo = async(req, res) => {
+exports.SignInUser = async(req, res) => {
     try {
         const users = await this.GetAllUsersNoRes(req, res)
         let userFound = null
 
         users.forEach(user => {
-            if (user.login === req.body.login && user.password === req.body.pwd) {
+            if (user.login === req.body.login && user.password === req.body.password) {
                 userFound = user
             }
         });

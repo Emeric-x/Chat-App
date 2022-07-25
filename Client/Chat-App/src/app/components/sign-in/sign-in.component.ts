@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(private UsersService: UsersService, private Router: Router) { }
 
   ngOnInit(): void {
   }
 
+  async SignIn(sUserLogin: string, sUserPassword: string){
+    this.UsersService.LoggedUserData = await this.UsersService.SignInUser(sUserLogin, sUserPassword)
+
+    if(this.UsersService.LoggedUserData){
+      this.UsersService.isAuth = true
+      this.Router.navigate(['/GroupsChat'])
+    }
+  }
 }

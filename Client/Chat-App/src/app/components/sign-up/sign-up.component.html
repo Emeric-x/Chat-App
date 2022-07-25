@@ -1,1 +1,7 @@
-<p>sign-up works!</p>
+<h1>New account</h1>
+<input type="text" placeholder="firstname" #newUserFirstname required>
+<input type="text" placeholder="lastname" #newUserLastname required>
+<input type="text" placeholder="login" #newUserLogin required>
+<input type="password" placeholder="password" #newUserPassword required>
+
+<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value)">Ok</button>
