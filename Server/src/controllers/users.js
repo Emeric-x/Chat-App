@@ -57,7 +57,7 @@ exports.AddUserChat = async(req, res, sUser_id, sChat) => {
         let user = await User.findById(sUser_id)
 
         if (!user) {
-            res.status(404).json({ msg: 'No matching user' })
+            return 'No matching user'
         } else {
             user.chats.push({
                 chat_id: sChat._id,
@@ -67,11 +67,11 @@ exports.AddUserChat = async(req, res, sUser_id, sChat) => {
 
             user = await User.findOneAndUpdate({ _id: sUser_id }, user, { new: true })
 
-            res.json(true)
+            return true
         }
     } catch (err) {
         console.log(err)
-        res.status(500).send('Server Error')
+        return err
     }
 }
 

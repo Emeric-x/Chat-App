@@ -25,8 +25,8 @@ exports.PostChat = async(req, res) => {
         const chat = new Chat(req.body)
         await chat.save()
 
-        chat.users.forEach(user => {
-            await this.UsersController.AddUserChat(req, res, user.user_id, chat._id)
+        chat.users.forEach(async(user) => {
+            await UsersController.AddUserChat(req, res, user.user_id, chat)
         });
 
         res.json(chat)

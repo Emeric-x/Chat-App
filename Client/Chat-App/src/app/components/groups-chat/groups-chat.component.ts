@@ -25,6 +25,8 @@ export class GroupsChatComponent implements OnInit {
       users: [] as any
     }
 
+    this.ChatMembers.push(this.UsersService.LoggedUserData)
+
     this.ChatMembers.forEach((member: any) => {
       chat.users.push({
         user_id: member._id,
