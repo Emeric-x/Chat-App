@@ -52,17 +52,22 @@ exports.UpdateUserPersonalData = async(req, res) => {
     }
 }
 
-exports.AddUserChat = async(req, res) => {
+exports.AddUserChat = async(req, res, sUser_id, sChat) => {
     try {
-        let user = await User.findById(req.params.id)
+        let user = await User.findById(sUser_id)
+
         if (!user) {
             res.status(404).json({ msg: 'No matching user' })
         } else {
-            user.groups.push(req.body)
+            user.chats.push({
+                chat_id: sChat._id,
+                name: sChat.name,
+                logo: sChat.logo
+            })
 
-            user = await User.findOneAndUpdate({ _id: req.params.id }, user, { new: true })
+            user = await User.findOneAndUpdate({ _id: sUser_id }, user, { new: true })
 
-            res.json(req.body)
+            res.json(true)
         }
     } catch (err) {
         console.log(err)
@@ -78,6 +83,28 @@ exports.GetUserById = async(req, res) => {
             res.status(404).json({ msg: 'No matching user' })
         } else {
             res.json(user)
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Server Error')
+    }
+}
+
+exports.GetUserByLogin = async(req, res) => {
+    try {
+        const users = await this.GetAllUsersNoRes(req, res)
+        let userFound = null
+
+        users.forEach(user => {
+            if (user.login === req.params.login) {
+                userFound = user
+            }
+        });
+
+        if (userFound === null) {
+            res.status(404).json({ msg: 'No matching user' })
+        } else {
+            res.json(userFound)
         }
     } catch (err) {
         console.log(err)

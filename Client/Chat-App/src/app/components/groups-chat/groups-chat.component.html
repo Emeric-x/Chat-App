@@ -1,1 +1,44 @@
-<p>groups-chat works!</p>
+<div>
+    <h1>Your Chats</h1>
+
+    <br>
+
+    <div *ngIf="this.UsersService.LoggedUserData!.chats; else UserHasNoChats">
+        <div *ngFor="let chat of this.UsersService.LoggedUserData!.chats">
+            <button (click)="GetChatById(chat.chat_id)">{{ chat.name }}</button>
+        </div>
+    </div>
+    <ng-template #UserHasNoChats>
+        <p>You have no chats...</p>
+    </ng-template>
+</div>
+
+<br>
+
+<div>
+    <h1>Create new Chat</h1>
+
+    <br>
+
+    <button (click)="this.NewChatBtn = true">New</button>
+
+    <div *ngIf="this.NewChatBtn">
+        <label for="chatName">Name</label>
+        <input type="text" id="chatName" #chatName>
+
+        <br>
+
+        <label for="chatLogo">Logo</label>
+        <input type="text" id="chatLogo" #chatLogo>
+
+        <br>
+
+        <label for="chatMember">Members</label>
+        <input type="text" id="chatMember" #chatMember>
+        <button (click)="GetUserByLogin(chatMember.value)">Add</button>
+
+        <br>
+
+        <button (click)="this.NewChat(chatName.value, chatLogo.value)">Create</button>
+    </div>
+</div>

@@ -18,4 +18,8 @@ export class UsersService {
   SignInUser(sLogin: string, sPassword: string): Promise<any>{
     return this.ApiService.SignInUser(sLogin, sPassword).toPromise()
   }
+
+  GetUserByLogin(sLogin: string): Promise<any>{
+    return this.ApiService.GetUserByLogin(sLogin).toPromise()
+  }
 }

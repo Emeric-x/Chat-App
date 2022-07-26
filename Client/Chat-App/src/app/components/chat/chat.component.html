@@ -1,1 +1,13 @@
-<p>chat works!</p>
+<div>
+    <div *ngIf="this.ChatsService.CurrentChat!.messages !== null">
+        <div *ngFor="let message of this.ChatsService.CurrentChat!.messages">
+            <p>{{ message.author.firstname }}</p>
+            <p>{{ message.text }}</p>
+        </div>
+    </div>
+
+    <br>
+
+    <input type="text" #messageText>
+    <button (click)="SendMessage(messageText.value)">Send</button>
+</div>
