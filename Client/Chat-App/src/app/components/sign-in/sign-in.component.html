@@ -1,8 +1,16 @@
 <div>
     <h1>Sign-in</h1>
-    <input type="text" #userLogin required>
-    <input type="password" #userPassword required>
 
+    <br>
+
+    <label for="userLogin">Login</label>
+    <input type="text" name="userLogin" #userLogin required>
+    <br>
+    <br>
+    <label for="userPassword">Password</label>
+    <input type="password" name="userPassword" #userPassword required>
+    <br>
+    <br>
     <button type="button" (click)="SignIn(userLogin.value, userPassword.value)">Go</button>
 
     <br>
@@ -12,7 +20,10 @@
 
 <br>
 
-<div>
-    <h1>Sign-up</h1>
+<div id="Signup">
+    <h1>New account ?</h1>
+
+    <br>
+
     <a routerLink="/Sign-up">Sign-up</a>
 </div>

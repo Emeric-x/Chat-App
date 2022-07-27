@@ -1,0 +1,25 @@
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+}
+
+#Signup {
+    margin: 10%;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 926px) {}

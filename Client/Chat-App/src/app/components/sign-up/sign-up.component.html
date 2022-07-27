@@ -1,9 +1,23 @@
 <h1>New account</h1>
-<input type="text" placeholder="firstname" #newUserFirstname required>
-<input type="text" placeholder="lastname" #newUserLastname required>
-<input type="text" placeholder="login" #newUserLogin required>
-<input type="password" placeholder="password" #newUserPassword required>
 
+<br>
+
+<label for="firstname">Firstname</label>
+<input type="text" name="Firstname" #newUserFirstname required>
+<br>
+<br>
+<label for="lastname">Lastname</label>
+<input type="text" name="lastname" #newUserLastname required>
+<br>
+<br>
+<label for="login">Login</label>
+<input type="text" name="login" #newUserLogin required>
+<br>
+<br>
+<label for="password">Password</label>
+<input type="password" name="password" #newUserPassword required>
+<br>
+<br>
 <button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value)">Ok</button>
 
 <br>
