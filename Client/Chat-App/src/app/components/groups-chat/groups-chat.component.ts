@@ -29,25 +29,29 @@ export class GroupsChatComponent implements OnInit {
     }
 
     this.ChatMembers.push(this.UsersService.LoggedUserData)
-    this.ChatMembers.forEach((member: any) => {
-      chat.users.push({
-        user_id: member._id,
-        firstname: member.firstname,
-        lastname: member.lastname,
-        login: member.login,
-        avatar: member.avatar
-      })
-    });
+    if(this.ChatMembers.length > 1){
+      this.ChatMembers.forEach((member: any) => {
+        chat.users.push({
+          user_id: member._id,
+          firstname: member.firstname,
+          lastname: member.lastname,
+          login: member.login,
+          avatar: member.avatar
+        })
+      });
 
-    let resultChat = await this.ChatsService.ChatAlreadyExists(chat, this.UsersService.LoggedUserData?.chats!)
-    
-    if(!resultChat){
-      this.ChatsService.CurrentChat = await this.ChatsService.CreateNewChat(chat)
+      let resultChat = await this.ChatsService.ChatAlreadyExists(chat, this.UsersService.LoggedUserData?.chats!)
+      
+      if(!resultChat){
+        this.ChatsService.CurrentChat = await this.ChatsService.CreateNewChat(chat)
+      } else {
+        this.ChatsService.CurrentChat = resultChat
+      }
+
+      this.Router.navigate(['/Chat'])
     } else {
-      this.ChatsService.CurrentChat = resultChat
+      this.ErrorMsg = "You need to add at least one member to create a chat."
     }
-
-    this.Router.navigate(['/Chat'])
   }
 
   async AddUserByLogin(sUserLogin: string){

@@ -1,13 +1,17 @@
-<div>
+<div id="chatHeader">
+    <a routerLink="/GroupsChat">Back</a>
+    <!--img-->
+    <h1>{{ this.ChatsService.CurrentChat!.name }}</h1>
+</div>
+<div id="chatBody">
     <div *ngIf="this.ChatsService.CurrentChat!.messages !== null">
         <div *ngFor="let message of this.ChatsService.CurrentChat!.messages">
             <p>{{ message.author.firstname }}</p>
             <p>{{ message.text }}</p>
         </div>
     </div>
-
-    <br>
-
+</div>
+<div id="chatFooter">
     <input type="text" #messageText>
     <button (click)="SendMessage(messageText.value); messageText.value = ''">Send</button>
 </div>

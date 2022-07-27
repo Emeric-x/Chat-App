@@ -16,13 +16,17 @@ export class SignInComponent implements OnInit {
   }
 
   async SignIn(sUserLogin: string, sUserPassword: string){
-    this.UsersService.LoggedUserData = await this.UsersService.SignInUser(sUserLogin, sUserPassword)
-    
-    if(this.UsersService.LoggedUserData){
-      this.UsersService.isAuth = true
-      this.Router.navigate(['/GroupsChat'])
+    if(sUserLogin && sUserPassword){
+      this.UsersService.LoggedUserData = await this.UsersService.SignInUser(sUserLogin, sUserPassword)
+      
+      if(this.UsersService.LoggedUserData){
+        this.UsersService.isAuth = true
+        this.Router.navigate(['/GroupsChat'])
+      } else {
+        this.ErrorMsg = "Login or password incorrect."
+      }
     } else {
-      this.ErrorMsg = "Login or password incorrect."
+      this.ErrorMsg = "You must fill all the fields."
     }
   }
 }

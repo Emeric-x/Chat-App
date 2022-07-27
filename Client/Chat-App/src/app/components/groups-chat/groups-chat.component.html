@@ -15,35 +15,39 @@
 
 <br>
 
-<div>
+<div id="newChat">
     <h1>Create new Chat</h1>
 
     <br>
 
     <button (click)="this.NewChatBtn = true">New</button>
 
-    <div *ngIf="this.NewChatBtn">
+    <div *ngIf="this.NewChatBtn" id="newChatForm">
         <label for="chatName">Name</label>
-        <input type="text" id="chatName" #chatName>
+        <input type="text" id="chatName" #chatName required>
 
         <br>
 
         <label for="chatLogo">Logo</label>
-        <input type="text" id="chatLogo" #chatLogo>
+        <input type="text" id="chatLogo" #chatLogo required>
 
         <br>
 
-        <label for="chatMember">Members</label>
+        <label for="chatMember">Member</label>
         <input type="text" id="chatMember" #chatMember>
-        <button (click)="AddUserByLogin(chatMember.value); chatMember.value = ''">Add</button>
-        <p *ngIf="this.SuccessMsg">{{ this.SuccessMsg }}</p>
+        <br>
+        <br>
+        <button (click)="AddUserByLogin(chatMember.value); chatMember.value = ''">Add member</button>
 
+        <br>
         <br>
 
         <button (click)="this.NewChat(chatName.value, chatLogo.value)">Create</button>
 
         <br>
+        <br>
 
+        <p *ngIf="this.SuccessMsg">{{ this.SuccessMsg }}</p>
         <p *ngIf="this.ErrorMsg">{{ this.ErrorMsg }}</p>
     </div>
 </div>

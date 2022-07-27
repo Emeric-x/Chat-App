@@ -3,23 +3,28 @@
 <br>
 
 <label for="firstname">Firstname</label>
-<input type="text" name="Firstname" #newUserFirstname required>
+<input type="text" name="Firstname" #newUserFirstname>
 <br>
 <br>
 <label for="lastname">Lastname</label>
-<input type="text" name="lastname" #newUserLastname required>
+<input type="text" name="lastname" #newUserLastname>
 <br>
 <br>
 <label for="login">Login</label>
-<input type="text" name="login" #newUserLogin required>
+<input type="text" name="login" #newUserLogin>
 <br>
 <br>
 <label for="password">Password</label>
-<input type="password" name="password" #newUserPassword required>
+<input type="password" name="password" #newUserPassword>
 <br>
 <br>
-<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value)">Ok</button>
+<label for="avatar">Avatar</label>
+<input type="file" name="avatar" #newUserAvatar>
+<br>
+<br>
+<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value, newUserAvatar.value)">Ok</button>
 
+<br>
 <br>
 
 <p *ngIf="this.ErrorMsg">{{ this.ErrorMsg }}</p>

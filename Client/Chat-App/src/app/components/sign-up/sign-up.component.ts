@@ -16,24 +16,28 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async SignUp(sNewUserFirstname: string, sNewUserLastname: string, sNewUserLogin: string, sNewUserPassword: string){
-    if(!this.UsersService.LoginAlreadyUser(sNewUserLogin)){
-      const newUser: User = {
-        firstname: sNewUserFirstname,
-        lastname: sNewUserLastname,
-        login: sNewUserLogin,
-        password: sNewUserPassword,
-        avatar: "ok"
-      }
-  
-      this.UsersService.LoggedUserData = await this.UsersService.SignUpUser(newUser)
-  
-      if(this.UsersService.LoggedUserData){
-        this.UsersService.isAuth = true
-        this.Router.navigate(['/GroupsChat'])
+  async SignUp(sNewUserFirstname: string, sNewUserLastname: string, sNewUserLogin: string, sNewUserPassword: string, sNewUserAvatar: string){
+    if(sNewUserFirstname && sNewUserLastname && sNewUserLogin && sNewUserPassword){
+      if(!this.UsersService.LoginAlreadyUser(sNewUserLogin)){
+        const newUser: User = {
+          firstname: sNewUserFirstname,
+          lastname: sNewUserLastname,
+          login: sNewUserLogin,
+          password: sNewUserPassword,
+          avatar: "ok"
+        }
+    
+        this.UsersService.LoggedUserData = await this.UsersService.SignUpUser(newUser)
+    
+        if(this.UsersService.LoggedUserData){
+          this.UsersService.isAuth = true
+          this.Router.navigate(['/GroupsChat'])
+        }
+      } else {
+        this.ErrorMsg = "This login is already used."
       }
     } else {
-      this.ErrorMsg = "This login is already used."
+      this.ErrorMsg = "You must fill all the fields."
     }
   }
 }

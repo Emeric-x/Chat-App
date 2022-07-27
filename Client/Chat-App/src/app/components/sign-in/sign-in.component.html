@@ -1,18 +1,19 @@
-<div>
+<div id="Signin">
     <h1>Sign-in</h1>
 
     <br>
 
     <label for="userLogin">Login</label>
-    <input type="text" name="userLogin" #userLogin required>
+    <input type="text" name="userLogin" #userLogin>
     <br>
     <br>
     <label for="userPassword">Password</label>
-    <input type="password" name="userPassword" #userPassword required>
+    <input type="password" name="userPassword" #userPassword>
     <br>
     <br>
     <button type="button" (click)="SignIn(userLogin.value, userPassword.value)">Go</button>
 
+    <br>
     <br>
 
     <p *ngIf="this.ErrorMsg">{{ this.ErrorMsg }}</p>
