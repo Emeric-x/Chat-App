@@ -15,7 +15,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.component';
 
 const appRoutes: Routes = [
-  { path: '', component: GroupsChatComponent },
+  { path: '', component: SignInComponent },
   { path: 'Sign-in', component: SignInComponent },
   { path: 'Sign-up', component: SignUpComponent }, 
   { path: 'GroupsChat', canActivate:[AuthGuardService], component: GroupsChatComponent },

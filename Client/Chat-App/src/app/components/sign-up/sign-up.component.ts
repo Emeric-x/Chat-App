@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  ErrorLoginAlreadyUsed: string | undefined
 
   constructor(private UsersService: UsersService, private Router: Router) { }
 
@@ -16,19 +17,23 @@ export class SignUpComponent implements OnInit {
   }
 
   async SignUp(sNewUserFirstname: string, sNewUserLastname: string, sNewUserLogin: string, sNewUserPassword: string){
-    const newUser: User = {
-      firstname: sNewUserFirstname,
-      lastname: sNewUserLastname,
-      login: sNewUserLogin,
-      password: sNewUserPassword,
-      avatar: "ok"
-    }
-
-    this.UsersService.LoggedUserData = await this.UsersService.SignUpUser(newUser)
-
-    if(this.UsersService.LoggedUserData){
-      this.UsersService.isAuth = true
-      this.Router.navigate(['/GroupsChat'])
+    if(!this.UsersService.LoginAlreadyUser(sNewUserLogin)){
+      const newUser: User = {
+        firstname: sNewUserFirstname,
+        lastname: sNewUserLastname,
+        login: sNewUserLogin,
+        password: sNewUserPassword,
+        avatar: "ok"
+      }
+  
+      this.UsersService.LoggedUserData = await this.UsersService.SignUpUser(newUser)
+  
+      if(this.UsersService.LoggedUserData){
+        this.UsersService.isAuth = true
+        this.Router.navigate(['/GroupsChat'])
+      }
+    } else {
+      this.ErrorLoginAlreadyUsed = "This login is already used."
     }
   }
 }

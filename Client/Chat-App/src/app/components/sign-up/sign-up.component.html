@@ -5,3 +5,7 @@
 <input type="password" placeholder="password" #newUserPassword required>
 
 <button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value)">Ok</button>
+
+<br>
+
+<p *ngIf="this.ErrorLoginAlreadyUsed">{{ this.ErrorLoginAlreadyUsed }}</p>

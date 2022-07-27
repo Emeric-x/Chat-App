@@ -43,11 +43,25 @@ export class GroupsChatComponent implements OnInit {
 
   async GetUserByLogin(sUserLogin: string){
     let user = await this.UsersService.GetUserByLogin(sUserLogin)
-    this.ChatMembers.push(user)
+
+    if(!this.MemberAlreadyIn(user.login)){
+      this.ChatMembers.push(user)
+    }
   }
 
   async GetChatById(sChat_id: string){
     this.ChatsService.CurrentChat = await this.ChatsService.GetChatById(sChat_id)
     this.Router.navigate(['/Chat'])
+  }
+
+  MemberAlreadyIn(sLogin: string): boolean{
+    let result: boolean = false
+
+    this.ChatMembers.forEach((user: any) => {
+      if(user.login === sLogin){
+        result = true
+      }
+    });
+    return result
   }
 }

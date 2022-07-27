@@ -22,4 +22,22 @@ export class UsersService {
   GetUserByLogin(sLogin: string): Promise<any>{
     return this.ApiService.GetUserByLogin(sLogin).toPromise()
   }
+
+  GetAllUsers(): Promise<any>{
+    return this.ApiService.GetAllUsers().toPromise()
+  }
+
+  async LoginAlreadyUser(sLogin: string){
+    let AllUsers: any = []
+    let result: boolean = false
+
+    AllUsers = await this.GetAllUsers()
+    AllUsers.forEach((user: any) => {
+      if(user.login === sLogin){
+        result = true
+      }
+    });
+
+    return result
+  }
 }

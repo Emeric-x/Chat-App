@@ -4,6 +4,10 @@
     <input type="password" #userPassword required>
 
     <button type="button" (click)="SignIn(userLogin.value, userPassword.value)">Go</button>
+
+    <br>
+
+    <p *ngIf="this.ErrorLoginOrPwdIncorrect">{{ this.ErrorLoginOrPwdIncorrect }}</p>
 </div>
 
 <br>

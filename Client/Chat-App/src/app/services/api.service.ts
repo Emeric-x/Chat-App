@@ -10,6 +10,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  GetAllUsers(){
+    return this.http.get(`http://localhost:3000/users`)
+  }
+
   SignUpUser(sUser: User){
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(sUser);

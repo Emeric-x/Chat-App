@@ -124,7 +124,7 @@ exports.SignInUser = async(req, res) => {
         });
 
         if (userFound === null) {
-            res.status(404).json({ msg: 'No matching user' })
+            res.send(false)
         } else {
             res.json(userFound)
         }
