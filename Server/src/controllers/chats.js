@@ -1,5 +1,6 @@
 const Chat = require("../models/chat")
 const UsersController = require("../controllers/users")
+const UserModel = require("../models/user")
 
 exports.GetAllChats = async(req, res) => {
     try {
@@ -33,6 +34,47 @@ exports.PostChat = async(req, res) => {
     } catch (err) {
         console.log(err)
         res.status(500).send('Server Error')
+    }
+}
+
+exports.ChatAlreadyCreated = async(req, res) => {
+    try {
+        const AllChats = await this.GetAllChatsNoRes(req, res)
+
+        let AllUserChats = []
+        let sameUser = 0
+        let SimilarChatFounded = null
+        let done = false
+
+        req.body.user_chats.forEach(async(chat) => {
+            let chatById = await Chat.findById(chat.chat_id)
+            AllUserChats.push(chatById)
+        });
+
+        AllChats.forEach(chat => {
+            if (!done) {
+                sameUser = 0
+                SimilarChatFounded = chat
+
+                chat.users.forEach(user => {
+                    req.body.chat.users.forEach(newChat_User => {
+                        if (user.login === newChat_User.login) {
+                            sameUser++
+                        }
+                    });
+                });
+            }
+
+            if (sameUser === req.body.chat.users.length) {
+                done = true
+                res.json(chat)
+            }
+        });
+
+        // res.send(false)
+    } catch (err) {
+        console.log(err)
+            // res.status(500).send('Server Error')
     }
 }
 

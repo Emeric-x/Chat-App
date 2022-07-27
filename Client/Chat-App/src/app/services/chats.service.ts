@@ -26,4 +26,8 @@ export class ChatsService {
   SendMessage(sMessage: string, sAuthor: User): Promise<any>{
     return this.ApiService.SendMessage(sMessage, sAuthor, this.CurrentChat?._id!).toPromise()
   }
+
+  ChatAlreadyExists(sChat: Chat, sUser_chats: any): Promise<any>{
+    return this.ApiService.ChatAlreadyCreated(sChat, sUser_chats).toPromise()
+  }
 }

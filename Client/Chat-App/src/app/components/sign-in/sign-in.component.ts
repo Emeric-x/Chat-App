@@ -8,7 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  ErrorLoginOrPwdIncorrect: string | undefined
+  ErrorMsg: string | undefined
 
   constructor(private UsersService: UsersService, private Router: Router) { }
 
@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
       this.UsersService.isAuth = true
       this.Router.navigate(['/GroupsChat'])
     } else {
-      this.ErrorLoginOrPwdIncorrect = "Login or password incorrect."
+      this.ErrorMsg = "Login or password incorrect."
     }
   }
 }

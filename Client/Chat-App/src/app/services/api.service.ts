@@ -52,4 +52,13 @@ export class ApiService {
     });
     return this.http.post(`http://localhost:3000/chats/messages`, body, {'headers':headers})
   }
+
+  ChatAlreadyCreated(sChat: Chat, sUser_chats: any){
+    const headers = { 'content-type': 'application/json'}
+    const body=JSON.stringify({
+      chat: sChat,
+      user_chats: sUser_chats
+    });
+    return this.http.post(`http://localhost:3000/chats/ChatAlreadyCreated`, body, {'headers':headers})
+  }
 }

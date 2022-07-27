@@ -35,10 +35,15 @@
 
         <label for="chatMember">Members</label>
         <input type="text" id="chatMember" #chatMember>
-        <button (click)="GetUserByLogin(chatMember.value)">Add</button>
+        <button (click)="AddUserByLogin(chatMember.value); chatMember.value = ''">Add</button>
+        <p *ngIf="this.SuccessMsg">{{ this.SuccessMsg }}</p>
 
         <br>
 
         <button (click)="this.NewChat(chatName.value, chatLogo.value)">Create</button>
+
+        <br>
+
+        <p *ngIf="this.ErrorMsg">{{ this.ErrorMsg }}</p>
     </div>
 </div>

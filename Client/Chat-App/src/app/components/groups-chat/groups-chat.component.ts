@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chat } from 'src/app/interfaces/chat';
@@ -12,6 +13,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class GroupsChatComponent implements OnInit {
   NewChatBtn: boolean = false
   ChatMembers: any = []
+  ErrorMsg: string | undefined
+  SuccessMsg: string | undefined
 
   constructor(public UsersService: UsersService, private ChatsService: ChatsService, private Router: Router) { }
 
@@ -26,7 +29,6 @@ export class GroupsChatComponent implements OnInit {
     }
 
     this.ChatMembers.push(this.UsersService.LoggedUserData)
-
     this.ChatMembers.forEach((member: any) => {
       chat.users.push({
         user_id: member._id,
@@ -37,15 +39,31 @@ export class GroupsChatComponent implements OnInit {
       })
     });
 
-    this.ChatsService.CurrentChat = await this.ChatsService.CreateNewChat(chat)
+    let resultChat = await this.ChatsService.ChatAlreadyExists(chat, this.UsersService.LoggedUserData?.chats!)
+    
+    if(!resultChat){
+      this.ChatsService.CurrentChat = await this.ChatsService.CreateNewChat(chat)
+    } else {
+      this.ChatsService.CurrentChat = resultChat
+    }
+
     this.Router.navigate(['/Chat'])
   }
 
-  async GetUserByLogin(sUserLogin: string){
+  async AddUserByLogin(sUserLogin: string){
     let user = await this.UsersService.GetUserByLogin(sUserLogin)
 
-    if(!this.MemberAlreadyIn(user.login)){
-      this.ChatMembers.push(user)
+    if(user){
+      if(!this.MemberAlreadyIn(user.login)){
+        this.ChatMembers.push(user)
+        this.SuccessMsg = `User ${user.login} has been added !`
+      } else {
+        this.SuccessMsg = ""
+        this.ErrorMsg = "This user has already been added."
+      }
+    } else {
+      this.SuccessMsg = ""
+      this.ErrorMsg = "This user doesn't exist."
     }
   }
 

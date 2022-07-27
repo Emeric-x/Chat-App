@@ -9,7 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  ErrorLoginAlreadyUsed: string | undefined
+  ErrorMsg: string | undefined
 
   constructor(private UsersService: UsersService, private Router: Router) { }
 
@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
         this.Router.navigate(['/GroupsChat'])
       }
     } else {
-      this.ErrorLoginAlreadyUsed = "This login is already used."
+      this.ErrorMsg = "This login is already used."
     }
   }
 }
