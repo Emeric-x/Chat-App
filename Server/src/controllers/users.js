@@ -1,4 +1,5 @@
 const User = require("../models/user")
+const cryptojs = require("crypto-js")
 
 exports.GetAllUsers = async(req, res) => {
     try {

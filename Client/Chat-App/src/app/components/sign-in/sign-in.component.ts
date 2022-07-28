@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { SHA256, enc } from 'crypto-js';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class SignInComponent implements OnInit {
   ErrorMsg: string | undefined
-
+  
   constructor(private UsersService: UsersService, private Router: Router) { }
 
   ngOnInit(): void {
@@ -17,7 +18,8 @@ export class SignInComponent implements OnInit {
 
   async SignIn(sUserLogin: string, sUserPassword: string){
     if(sUserLogin && sUserPassword){
-      this.UsersService.LoggedUserData = await this.UsersService.SignInUser(sUserLogin, sUserPassword)
+      let hashedPassword = SHA256(sUserPassword).toString(enc.Hex)
+      this.UsersService.LoggedUserData = await this.UsersService.SignInUser(sUserLogin, hashedPassword)
       
       if(this.UsersService.LoggedUserData){
         this.UsersService.isAuth = true

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users.service';
+import { SHA256, enc } from 'crypto-js';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,12 +19,16 @@ export class SignUpComponent implements OnInit {
 
   async SignUp(sNewUserFirstname: string, sNewUserLastname: string, sNewUserLogin: string, sNewUserPassword: string, sNewUserAvatar: string){
     if(sNewUserFirstname && sNewUserLastname && sNewUserLogin && sNewUserPassword){
-      if(!this.UsersService.LoginAlreadyUser(sNewUserLogin)){
+      let hashPassword = SHA256(sNewUserPassword).toString(enc.Hex)
+
+      if(await this.UsersService.LoginAlreadyUser(sNewUserLogin)){
+        this.ErrorMsg = "This login is already used."
+      } else {
         const newUser: User = {
           firstname: sNewUserFirstname,
           lastname: sNewUserLastname,
           login: sNewUserLogin,
-          password: sNewUserPassword,
+          password: hashPassword,
           avatar: "ok"
         }
     
@@ -33,8 +38,6 @@ export class SignUpComponent implements OnInit {
           this.UsersService.isAuth = true
           this.Router.navigate(['/GroupsChat'])
         }
-      } else {
-        this.ErrorMsg = "This login is already used."
       }
     } else {
       this.ErrorMsg = "You must fill all the fields."
