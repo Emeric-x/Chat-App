@@ -41,40 +41,41 @@ exports.ChatAlreadyCreated = async(req, res) => {
     try {
         const AllChats = await this.GetAllChatsNoRes(req, res)
 
-        let AllUserChats = []
-        let sameUser = 0
-        let SimilarChatFounded = null
-        let done = false
+        if (req.body.user_chats.length > 0) {
+            let AllUserChats = []
+            let sameUser = 0
+            let SimilarChatFounded = null
+            let done = false
 
-        req.body.user_chats.forEach(async(chat) => {
-            let chatById = await Chat.findById(chat.chat_id)
-            AllUserChats.push(chatById)
-        });
+            req.body.user_chats.forEach(async(chat) => {
+                let chatById = await Chat.findById(chat.chat_id)
+                AllUserChats.push(chatById)
+            });
 
-        AllChats.forEach(chat => {
-            if (!done) {
-                sameUser = 0
-                SimilarChatFounded = chat
+            AllChats.forEach(chat => {
+                if (!done) {
+                    sameUser = 0
+                    SimilarChatFounded = chat
 
-                chat.users.forEach(user => {
-                    req.body.chat.users.forEach(newChat_User => {
-                        if (user.login === newChat_User.login) {
-                            sameUser++
-                        }
+                    chat.users.forEach(user => {
+                        req.body.chat.users.forEach(newChat_User => {
+                            if (user.login === newChat_User.login) {
+                                sameUser++
+                            }
+                        });
                     });
-                });
-            }
+                }
 
-            if (sameUser === req.body.chat.users.length) {
-                done = true
-                res.json(chat)
-            }
-        });
-
-        // res.send(false)
+                if (sameUser === req.body.chat.users.length) {
+                    done = true
+                    res.json(chat)
+                }
+            });
+        } else {
+            res.send(false)
+        }
     } catch (err) {
         console.log(err)
-            // res.status(500).send('Server Error')
     }
 }
 

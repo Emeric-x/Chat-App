@@ -23,6 +23,10 @@ export class UsersService {
     return this.ApiService.GetUserByLogin(sLogin).toPromise()
   }
 
+  GetUserById(sId: string): Promise<any>{
+    return this.ApiService.GetUserById(sId).toPromise()
+  }
+
   GetAllUsers(): Promise<any>{
     return this.ApiService.GetAllUsers().toPromise()
   }

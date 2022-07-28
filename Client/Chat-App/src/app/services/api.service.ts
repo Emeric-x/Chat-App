@@ -43,6 +43,10 @@ export class ApiService {
     return this.http.get(`http://localhost:3000/chats/${sId}`)
   }
 
+  GetUserById(sId: string){
+    return this.http.get(`http://localhost:3000/users/${sId}`)
+  }
+
   SendMessage(sMessage: string, sAuthor: User, sChat_id: string){
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify({
