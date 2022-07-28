@@ -24,12 +24,12 @@
 
     <div *ngIf="this.NewChatBtn" id="newChatForm">
         <label for="chatName">Name</label>
-        <input type="text" id="chatName" #chatName required>
+        <input type="text" id="chatName" #chatName>
 
         <br>
 
         <label for="chatLogo">Logo</label>
-        <input type="text" id="chatLogo" #chatLogo required>
+        <input type="file" id="chatLogo" #chatLogo #fileUpload>
 
         <br>
 

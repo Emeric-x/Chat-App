@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,8 +16,9 @@ export class GroupsChatComponent implements OnInit {
   ChatMembers: any = []
   ErrorMsg: string | undefined
   SuccessMsg: string | undefined
+  fileToUpload: File | null | undefined;
 
-  constructor(public UsersService: UsersService, private ChatsService: ChatsService, private Router: Router) { }
+  constructor(public UsersService: UsersService, private ChatsService: ChatsService, private Router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
   }
