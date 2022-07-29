@@ -3,15 +3,13 @@
     <h1>{{ this.ChatsService.CurrentChat!.name }}</h1>
     <!--img-->
 </div>
-<div id="chatBody">
-    <div *ngIf="this.ChatsService.CurrentChat!.messages !== null">
-        <div *ngFor="let message of this.ChatsService.CurrentChat!.messages" class="chatMessage">
-            <p>{{ message.author.firstname }}</p>
-            <p>{{ message.text }}</p>
-        </div>
+<div id="chatBody" *ngIf="this.ChatsService.CurrentChat!.messages !== null" #content>
+    <div *ngFor="let message of this.ChatsService.CurrentChat!.messages" class="chatMessage" #messages>
+        <p><b>{{ message.author.firstname }}</b></p>
+        <p>{{ message.text }}</p>
     </div>
 </div>
 <div id="chatFooter">
-    <input type="text" #messageText>
+    <textarea type="text" #messageText></textarea>
     <button (click)="SendMessage(messageText.value); messageText.value = ''">Send</button>
 </div>

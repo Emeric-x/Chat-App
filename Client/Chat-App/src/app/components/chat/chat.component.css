@@ -1,13 +1,18 @@
+#chatHeader {
+    width: 100%;
+    top: 0;
+}
+
 #chatHeader h1 {
     text-align: center;
 }
 
 #chatBody {
-    height: 100%;
-    overflow: auto;
     width: 100%;
+    height: 80%;
+    overflow-x: hidden;
     padding: 5px;
-    scroll-padding-top: 0;
+    margin-bottom: 5%;
 }
 
 .chatMessage {
@@ -19,7 +24,11 @@
 }
 
 #chatFooter {
-    position: fixed;
     bottom: 0;
     width: 100%;
+    text-align: center;
+}
+
+#chatFooter textarea {
+    width: 80%;
 }

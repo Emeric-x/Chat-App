@@ -6,8 +6,10 @@
     --color-button: white;
 }
 
+html,
 body {
-    margin: 20px;
+    height: 100%;
+    padding: 5%;
 }
 
 h1,
