@@ -13,9 +13,9 @@ app.use('/users', usersRoute)
 const chatsRoute = require("./routes/chats")
 app.use('/chats', chatsRoute)
 
-/*app.get('/', (req, res) => {
-    res.send('Hello World!')
-});*/
+app.get('/', (req, res) => {
+    res.send('Chat-App Server side')
+});
 
 app.listen(port, () => {
     console.log(`Server connected on port ${port} !`)

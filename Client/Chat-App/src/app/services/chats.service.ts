@@ -19,8 +19,8 @@ export class ChatsService {
     return this.ApiService.GetChatById(sId).toPromise()
   }
 
-  RefreshCurrentChat(): Promise<any>{
-    return this.ApiService.GetChatById(this.CurrentChat?._id!).toPromise()
+  GetMessagesByChatId(sChat_id: string): Promise<any>{
+    return this.ApiService.GetMessagesByChatId(sChat_id).toPromise()
   }
 
   SendMessage(sMessage: string, sAuthor: User): Promise<any>{

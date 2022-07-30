@@ -43,6 +43,10 @@ export class ApiService {
     return this.http.get(`http://localhost:3000/chats/${sId}`)
   }
 
+  GetMessagesByChatId(sChat_Id: string){
+    return this.http.get(`http://localhost:3000/chats/messages/${sChat_Id}`)
+  }
+
   GetUserById(sId: string){
     return this.http.get(`http://localhost:3000/users/${sId}`)
   }

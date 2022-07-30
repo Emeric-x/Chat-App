@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
     if(sNewUserFirstname && sNewUserLastname && sNewUserLogin && sNewUserPassword){
       let hashPassword = SHA256(sNewUserPassword).toString(enc.Hex)
 
-      if(await this.UsersService.LoginAlreadyUser(sNewUserLogin)){
+      if(await this.UsersService.LoginAlreadyUsed(sNewUserLogin)){
         this.ErrorMsg = "This login is already used."
       } else {
         const newUser: User = {

@@ -23,10 +23,10 @@
 <br>
 <br>
 <label for="avatar">Avatar</label>
-<input type="file" name="avatar" accept="image/png, image/jpeg" #newUserAvatar>
+<input type="file" name="avatar" accept="image/png, image/jpeg" #fileInput>
 <br>
 <br>
-<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value, newUserAvatar.value)">Ok</button>
+<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value, fileInput.value)">Ok</button>
 
 <br>
 <br>

@@ -4,7 +4,7 @@
     <!--img-->
 </div>
 <div id="chatBody" *ngIf="this.ChatsService.CurrentChat!.messages !== null" #content>
-    <div *ngFor="let message of this.ChatsService.CurrentChat!.messages" class="chatMessage" #messages>
+    <div *ngFor="let message of this.Messages" class="chatMessage" #messages>
         <p><b>{{ message.author.firstname }}</b></p>
         <p>{{ message.text }}</p>
     </div>

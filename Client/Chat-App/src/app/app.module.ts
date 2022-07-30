@@ -13,6 +13,8 @@ import { GroupsChatComponent } from './components/groups-chat/groups-chat.compon
 import { ChatComponent } from './components/chat/chat.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { FourOhFourComponent } from './components/four-oh-four/four-oh-four.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   { path: '', component: SignInComponent },
@@ -37,7 +39,13 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [ AuthGuardService ],
   bootstrap: [AppComponent]

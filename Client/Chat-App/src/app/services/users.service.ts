@@ -31,12 +31,12 @@ export class UsersService {
     return this.ApiService.GetAllUsers().toPromise()
   }
 
-  async LoginAlreadyUser(sLogin: string){
-    let AllUsers: any = []
+  async LoginAlreadyUsed(sLogin: string){
+    let AllUsers: User[] = []
     let result: boolean = false
 
     AllUsers = await this.GetAllUsers()
-    AllUsers.forEach((user: any) => {
+    AllUsers.forEach((user: User) => {
       if(user.login === sLogin){
         result = true
       }

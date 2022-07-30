@@ -10,12 +10,13 @@ import { UsersService } from 'src/app/services/users.service';
 export class ChatComponent implements OnInit {
   @ViewChildren('messages') messages: QueryList<any> | undefined;
   @ViewChild('content') content: ElementRef | undefined;
+  Messages: any = []
   
   constructor(public ChatsService: ChatsService, private UsersService: UsersService) { }
 
   ngOnInit(): void {
     setInterval(async () => {
-      this.ChatsService.CurrentChat = await this.ChatsService.RefreshCurrentChat()
+      this.Messages = await this.ChatsService.GetMessagesByChatId(this.ChatsService.CurrentChat?._id!)
     }, 1000);
   }
 

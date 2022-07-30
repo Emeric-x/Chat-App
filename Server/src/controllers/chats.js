@@ -1,6 +1,5 @@
 const Chat = require("../models/chat")
 const UsersController = require("../controllers/users")
-const UserModel = require("../models/user")
 
 exports.GetAllChats = async(req, res) => {
     try {
@@ -113,6 +112,36 @@ exports.GetChatById = async(req, res) => {
             res.status(404).json({ msg: 'No matching chat' })
         } else {
             res.json(chat)
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).send('Server Error')
+    }
+}
+
+exports.GetChatByIdNoRes = async(req, res) => {
+    try {
+        const chat = await Chat.findById(req.params.id)
+
+        if (!chat) {
+            return false
+        } else {
+            return chat
+        }
+    } catch (err) {
+        console.log(err)
+        return err
+    }
+}
+
+exports.GetMessagesByChatId = async(req, res) => {
+    try {
+        const chat = await this.GetChatByIdNoRes(req, res)
+
+        if (!chat) {
+            res.status(404).json({ msg: 'No matching chat' })
+        } else {
+            res.json(chat.messages)
         }
     } catch (err) {
         console.log(err)
