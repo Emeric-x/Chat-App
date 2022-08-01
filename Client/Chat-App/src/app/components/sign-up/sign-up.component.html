@@ -22,11 +22,11 @@
 <input type="password" name="password" #newUserPassword>
 <br>
 <br>
-<label for="avatar">Avatar</label>
-<input type="file" name="avatar" accept="image/png, image/jpeg" #fileInput>
+<!--<label for="avatar">Avatar</label>
+<input type="file" name="avatar" accept="image/png, image/jpeg" (change)="onFileSelected($event)">
 <br>
-<br>
-<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value, fileInput.value)">Ok</button>
+<br>-->
+<button type="button" (click)="SignUp(newUserFirstname.value, newUserLastname.value, newUserLogin.value, newUserPassword.value)">Ok</button>
 
 <br>
 <br>

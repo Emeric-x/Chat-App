@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UsersService } from 'src/app/services/users.service';
 import { SHA256, enc } from 'crypto-js';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,13 +12,14 @@ import { SHA256, enc } from 'crypto-js';
 })
 export class SignUpComponent implements OnInit {
   ErrorMsg: string | undefined
+  selectedFile : File | undefined
 
-  constructor(private UsersService: UsersService, private Router: Router) { }
+  constructor(private UsersService: UsersService, private Router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  async SignUp(sNewUserFirstname: string, sNewUserLastname: string, sNewUserLogin: string, sNewUserPassword: string, sNewUserAvatar: string){
+  async SignUp(sNewUserFirstname: string, sNewUserLastname: string, sNewUserLogin: string, sNewUserPassword: string){
     if(sNewUserFirstname && sNewUserLastname && sNewUserLogin && sNewUserPassword){
       let hashPassword = SHA256(sNewUserPassword).toString(enc.Hex)
 
@@ -42,5 +44,16 @@ export class SignUpComponent implements OnInit {
     } else {
       this.ErrorMsg = "You must fill all the fields."
     }
+  }
+
+  onFileSelected(event: any){
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  UploadImage(){
+    const formData = new FormData()
+    formData.append("image", this.selectedFile!, this.selectedFile!.name)
+
+    //call api to upload
   }
 }
